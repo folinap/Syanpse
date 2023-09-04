@@ -3,14 +3,14 @@ using UnityEngine.UI;
 
 public class End : MonoBehaviour {
 
-    [SerializeField] private GameObject winnerTeam;
+    [SerializeField] private Text _winnerTeam;
 	void Start()
     {
-        if(Score.a > Score.b)
-            winnerTeam.GetComponent<Text>().text = "Team 1 win";
-        else if(Score.b > Score.a)
-            winnerTeam.GetComponent<Text>().text = "Team 2 win";
-        else if (Score.b == Score.a)
-            winnerTeam.GetComponent<Text>().text = "Draw";
+        if(Score.FirstTeamScore > Score.SecondTeamScore)
+            _winnerTeam.text = "Team 1 win";
+        else if(Score.SecondTeamScore > Score.FirstTeamScore)
+            _winnerTeam.text = "Team 2 win";
+        else if (Score.SecondTeamScore == Score.FirstTeamScore)
+            _winnerTeam.text = "Draw";
     }      
 }

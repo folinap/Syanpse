@@ -2,19 +2,19 @@
 using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour {
-    public static bool teamChoose = true;
+    public static bool TeamChoose = true;
 
-    void OnMouseUpAsButton()
+    public void SceneChooser()
     {
-        if (teamChoose) //First team
+        if (TeamChoose) //First team
         {                      
             SceneManager.LoadScene("game1");
-            teamChoose = false;
+            TeamChoose = false;
         }
         else //Second Team
         {                      
             SceneManager.LoadScene("game2");
-            teamChoose = true;
+            TeamChoose = true;
         }
     }
 }

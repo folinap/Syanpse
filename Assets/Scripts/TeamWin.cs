@@ -6,9 +6,9 @@ public class TeamWin : MonoBehaviour
     private readonly int winScore = 100;
     void Start()
     {
-        if (StartGame.teamChoose)
+        if (StartGame.TeamChoose)
         {
-            if (Score.a > winScore || Score.b > winScore)
+            if (Score.FirstTeamScore > winScore || Score.SecondTeamScore > winScore)
             {
                 SceneManager.LoadScene("end");
             }

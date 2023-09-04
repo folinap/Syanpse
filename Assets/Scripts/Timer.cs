@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour {
     
-    private readonly int time = 60;
-    [SerializeField] GameObject interstitialAds;
+    private readonly int _time = 60;
+    [SerializeField]private InterstitialAds _interstitialAds;
+    [SerializeField]private Text _shownTime;
     
     void Start () {       
-        StartCoroutine("BackTime", time);
+        StartCoroutine(BackTime(_time));
     }
 
     IEnumerator BackTime(int i)
@@ -17,16 +18,21 @@ public class Timer : MonoBehaviour {
         while(i > 0)
         {
             i--;
-            gameObject.GetComponent<Text>().text = i.ToString();
+            _shownTime.text = i.ToString();
             yield return new WaitForSeconds(1);
             if (i == 0)
             {
-                SceneManager.LoadScene("score");
-                if (StartGame.teamChoose)
-                {
-                    interstitialAds.GetComponent<InterstitialAds>().ShowAd();
-                }
+                AdShow();
             }
+        }
+    }
+
+    private void AdShow()
+    {
+        SceneManager.LoadScene("score");
+        if (StartGame.TeamChoose)
+        {
+            _interstitialAds.ShowAd();
         }
     }
 }

@@ -1,46 +1,59 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.IO;
+using UnityEngine.UI;
 
 public class ChangeWord : MonoBehaviour {    
-    [SerializeField]private GameObject word;
-    private System.Random randomWord = new System.Random();
-    private string chosenWord;
+    [SerializeField]private Text _word;
+    private System.Random _randomWord = new System.Random();
+    private int _languageNumber;
+    private string _filePath;
+    private string[] _words;
+    private string[] _fileNames =
+    {
+        "/WordFiles/armenianWords.txt",
+        "/WordFiles/russianWords.txt",
+        "/WordFiles/englishWords.txt",
+        "/WordFiles/arabianWords.txt",
+        "/WordFiles/germanWords.txt"
+    };
     private void Start()
     {
-        ShowWord();
-    }  
-    private void OnMouseUpAsButton()
-    {
-        ShowWord();
+        FileSettings();
+        ChooseWord();
     }
-    private void ShowWord()
+
+    private int LanguageCheck()
     {
-        switch (LanguageButtons.language)
+        int i = 0; 
+        switch (LanguageButtons.Language)
         {
             case "Armenian":
-                ChooseWord("/WordFiles/armenianWords.txt");
+                i = 0;
                 break;
             case "Russian":
-                ChooseWord("/WordFiles/russianWords.txt");
+                i = 1;
                 break;
             case "English":
-                ChooseWord("/WordFiles/englishWords.txt");
+                i = 2;
                 break;
             case "Arabian":
-                ChooseWord("/WordFiles/arabianWords.txt");
+                i = 3;
                 break;
             case "German":
-                ChooseWord("/WordFiles/germanWords.txt");
+                i = 4;
                 break;
         }
+        return i;
     }
-    private void ChooseWord(string name)
+
+    private void FileSettings()
     {
-        string fileName = name;
-        string filePath = Application.dataPath + fileName;
-        string[] words = File.ReadAllText(filePath).Split(',');
-        chosenWord = words[randomWord.Next(0, words.Length)];
-        word.GetComponent<Text>().text = chosenWord;
+        _languageNumber = LanguageCheck();
+        _filePath = Application.dataPath + _fileNames[_languageNumber];
+        _words = File.ReadAllText(_filePath).Split(',');
+    }
+    public void ChooseWord()
+    {
+        _word.text = _words[_randomWord.Next(0, _words.Length)];
     }
 }

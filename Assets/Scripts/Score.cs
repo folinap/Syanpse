@@ -1,24 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {   
-    public static int a = 0;
-    public static int b = 0;
-
-    private void Update()
-    {
-        PlayerPrefs.SetString("Team1Score", a.ToString());
-        PlayerPrefs.SetString("Team2Score", b.ToString());  
-    }
+    public static int FirstTeamScore = 0;
+    public static int SecondTeamScore = 0;
     
-    private void OnMouseUpAsButton()
+    public void ScoreAdd()
     {              
             if (SceneManager.GetActiveScene().name == "game1")
-                a++;
+                FirstTeamScore++;
             else if (SceneManager.GetActiveScene().name == "game2")
-                b++;
+                SecondTeamScore++;
+        PlayerPrefs.SetString("Team1Score", FirstTeamScore.ToString());
+        PlayerPrefs.SetString("Team2Score", SecondTeamScore.ToString());  
     }
 }
 

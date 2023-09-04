@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 
 public class Close : MonoBehaviour {
-    void OnMouseUpAsButton()
+    public void BackScene()
     {        
         SceneManager.LoadScene("language");
     }
